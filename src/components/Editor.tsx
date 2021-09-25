@@ -1,12 +1,20 @@
 import React from 'react';
 
+interface EditorProps {
+  editorValueChange(e: React.ChangeEvent<HTMLTextAreaElement>): void;
+  input: string;
+  resizeWindow(): void;
+  minimizeOnClick(): void;
+  addStyles?: React.CSSProperties;
+}
+
 function Editor({
   editorValueChange,
   input,
   resizeWindow,
   minimizeOnClick,
   addStyles,
-}) {
+}: EditorProps) {
   return (
     <div className='window' style={addStyles}>
       <div className='top-bar'>
@@ -23,7 +31,7 @@ function Editor({
         <textarea
           className='Editor'
           value={input}
-          onChange={editorValueChange}
+          onChange={(e) => editorValueChange(e)}
         />
       </div>
     </div>

@@ -5,9 +5,21 @@ marked.setOptions({
   breaks: true,
 });
 
-const renderer = new marked.Renderer();
+const renderer: any = new marked.Renderer();
 
-function Preview({ input, resizeWindow, minimizeOnClick, addStyles }) {
+interface PreviewProps {
+  input: string;
+  resizeWindow(): void;
+  minimizeOnClick(): void;
+  addStyles?: React.CSSProperties;
+}
+
+function Preview({
+  input,
+  resizeWindow,
+  minimizeOnClick,
+  addStyles,
+}: PreviewProps) {
   function createMarkup() {
     return { __html: marked(input, renderer) };
   }

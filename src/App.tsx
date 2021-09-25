@@ -4,16 +4,19 @@ import Preview from './components/Preview';
 
 function App() {
   const [inputValue, setInputValue] = useState(placeholder);
+  const editorValueChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInputValue(e.target.value);
+  };
 
   // Single Window Mode
   const [singleWindowMode, setSingleWindowMode] = useState(false);
 
-  const singleWindowStyle = {
+  const singleWindowStyle: React.CSSProperties = {
     display: 'grid',
     gridTemplateRows: '1fr',
     gridTemplateColumns: '1fr',
-    justifyContent: null,
-    alignItems: null,
+    justifyContent: undefined,
+    alignItems: undefined,
   };
 
   // Show Editor State
@@ -42,13 +45,16 @@ function App() {
     setShowEditor(true);
   };
 
-  const maximizeWindowStyle = {
+  const maximizeWindowStyle: React.CSSProperties = {
     width: '100%',
     height: '100%',
   };
 
   return (
-    <div className='App' style={singleWindowMode ? singleWindowStyle : null}>
+    <div
+      className='App'
+      style={singleWindowMode ? singleWindowStyle : undefined}
+    >
       {showEditor && (
         <Editor
           input={inputValue}
@@ -58,7 +64,7 @@ function App() {
           }
           resizeWindow={singleWindowMode ? minimizeEditor : maximizeEditor}
           addStyles={
-            showEditor && singleWindowMode ? maximizeWindowStyle : null
+            showEditor && singleWindowMode ? maximizeWindowStyle : undefined
           }
         />
       )}
@@ -72,7 +78,7 @@ function App() {
             singleWindowMode ? minimizePreviewer : maximizePreviewer
           }
           addStyles={
-            showPreviewer && singleWindowMode ? maximizeWindowStyle : null
+            showPreviewer && singleWindowMode ? maximizeWindowStyle : undefined
           }
         />
       )}
